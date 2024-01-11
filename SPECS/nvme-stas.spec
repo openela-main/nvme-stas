@@ -3,8 +3,8 @@
 
 Name:    nvme-stas
 Summary: NVMe STorage Appliance Services
-Version: 2.1.1
-Release: 1%{?dist}
+Version: 2.2.1
+Release: 2%{?dist}
 License: ASL 2.0
 URL:     https://github.com/linux-nvme/nvme-stas
 Source0: %{url}/archive/v%{version_no_tilde}/%{name}-%{version_no_tilde}.tar.gz
@@ -13,7 +13,7 @@ BuildArch:     noarch
 
 BuildRequires: meson >= 0.57.0
 BuildRequires: glib2-devel
-BuildRequires: libnvme-devel >= 1.2
+BuildRequires: libnvme-devel >= 1.4
 BuildRequires: libxslt
 BuildRequires: docbook-style-xsl
 BuildRequires: systemd-devel
@@ -31,7 +31,7 @@ BuildRequires: python3-gobject-devel
 BuildRequires: python3-lxml
 
 Requires:      avahi
-Requires:      python3-libnvme >= 1.2
+Requires:      python3-libnvme >= 1.4
 Requires:      python3-dasbus
 Requires:      python3-pyudev
 Requires:      python3-systemd
@@ -47,7 +47,6 @@ stafd (STorage Appliance Finder) and stacd (STorage Appliance Connector).
 
 %prep
 %autosetup -p1 -n %{name}-%{version_no_tilde}
-sed -i meson.build -e "s/subdir('test')//"
 
 %build
 %meson -Dman=true -Dhtml=true
@@ -95,6 +94,12 @@ mv %{buildroot}/%{_sysconfdir}/stas/sys.conf.doc %{buildroot}/%{_sysconfdir}/sta
 %{_mandir}/man8/sta*.8*
 
 %changelog
+* Fri Apr 07 2023 Maurizio Lombardi <mlombard@redhat.com> - 2.2.1-2
+- Rebuild the package for side-tag
+
+* Thu Apr 06 2023 Maurizio Lombardi <mlombard@redhat.com> - 2.2.1-1
+- Update to version v2.2.1
+
 * Fri Jan 13 2023 John Meneghini <jmeneghi@redhat.com> - 2.1.1-1
   - Update to the v2.1.1 package
 
